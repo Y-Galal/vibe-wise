@@ -8,6 +8,16 @@ A plugin for **Claude Code** and **Codex** that puts learning first and keeps yo
 
 For anyone who wants to learn as they build—whether you're an aspiring engineer, a junior developer, or an experienced engineer exploring an unfamiliar stack. Practice planning how the pieces fit together, anticipating failures, and checking the result while keeping ownership of the decisions.
 
+## Table of Contents
+
+- [Get started](#get-started)
+  - [Claude Code](#claude-code)
+  - [Codex](#codex)
+- [What it feels like](#what-it-feels-like)
+- [Make it yours](#make-it-yours)
+- [Updating](#updating)
+- [License](#license)
+
 ## Get started
 
 You need an up-to-date [Claude Code](https://code.claude.com/docs/en/setup) or
