@@ -24,8 +24,7 @@ guides with `skill_view(name="vibe-wise:learn", file_path="behavior.md")` (and t
 corresponding filenames for onboarding and templates). Use `read_file` and
 `terminal` for project notes and discovery. Resolve the actual session workspace
 through those tools; never assume the plugin directory is the project.
-A missing
-`.vibe-wise/` directory is normal first-time setup, not an error. If a shell
+A missing `.vibe-wise/` directory is normal first-time setup, not an error. If a shell
 check is necessary, handle absence with an explicit conditional that succeeds;
 don't run `ls` on a possibly missing directory or hide actual read failures.
 Keep guide reads separate from optional state checks so a missing file doesn't

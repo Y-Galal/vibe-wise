@@ -1,63 +1,33 @@
 <img src=".claude-plugin/icon.svg" alt="VibeWise brain with code brackets" width="96" height="96">
 
-# VibeWise for Hermes
+# VibeWise
 
 **You build. AI writes.**
 
-A plugin for **Hermes Agent**, **Claude Code**, and **Codex** that puts learning first and keeps you in control while AI writes the code you designed. The AI **asks for your approach first**, helps you examine tradeoffs, and explains unfamiliar concepts. You shape the design and decide when it's ready to implement. The AI writes the code, then explains what it changed and why.
+A plugin for **Claude Code**, **Codex**, and **Hermes Agent** that puts learning first and keeps you in control while AI writes the code you designed. The AI **asks for your approach first**, helps you examine tradeoffs, and explains unfamiliar concepts. You shape the design and decide when it's ready to implement. The AI writes the code, then explains what it changed and why.
 
 For anyone who wants to learn as they build—whether you're an aspiring engineer, a junior developer, or an experienced engineer exploring an unfamiliar stack. Practice planning how the pieces fit together, anticipating failures, and checking the result while keeping ownership of the decisions.
 
-## Get started with Hermes
+## Table of Contents
 
-This is a Hermes-compatible fork of [Noah Kim's VibeWise](https://github.com/nykooi1/vibe-wise),
-with the original MIT attribution preserved. The Claude Code and Codex integrations
-remain available below.
+- [Get started](#get-started)
+  - [Claude Code](#claude-code)
+  - [Codex](#codex)
+  - [Hermes Agent](#hermes-agent)
+- [What it feels like](#what-it-feels-like)
+- [Make it yours](#make-it-yours)
+- [Updating](#updating)
+- [License](#license)
 
-Use a recent Hermes version with native plugin skills (`register_skill`) and the
-`pre_llm_call` context hook, plus Python 3. Once these changes are published to this
-fork, install and enable it:
+## Get started
 
-```sh
-hermes plugins install Y-Galal/vibe-wise-hermes --no-enable
-hermes plugins enable vibe-wise
-```
-
-For local development before publishing, copy this checkout to
-`~/.hermes/plugins/vibe-wise` (or your profile's `HERMES_HOME/plugins/vibe-wise`),
-then run `hermes plugins enable vibe-wise`. Restart Hermes in your project.
-
-Ask Hermes:
-
-```text
-Load the vibe-wise:learn skill and start learning mode for this project.
-```
-
-The agent loads `skill_view(name="vibe-wise:learn")`. This is a namespaced skill,
-not a port of Claude's `/vibe-wise:learn` slash command. To reset, explicitly ask
-to load `vibe-wise:reset`; it previews the target and waits for confirmation before
-backing up and resetting notes. Say “Pause learning” to pause, or load Learn again
-to resume.
-
-Existing `.vibe-wise/` and legacy `.sensible-vibes/` notes work in place. A small
-instruction is injected each main-conversation turn, asking Hermes to discover
-notes in its actual workspace and restore active learning. Installing alone does
-not enable learning. Restoration is agent-driven, so it adds file/tool work and
-depends on the model following the instructions. It does not enforce checkpoints
-through a tool-blocking mechanism.
-
-The reset helper requires the plugin and project to be accessible in the same
-terminal filesystem, and Hermes's default skill template substitution enabled.
-Remote/container reset is not supported when the installed helper is inaccessible.
-
-See [Hermes development and validation](docs/hermes.md) for checks and limitations.
-
-## Get started with Claude Code or Codex
-
-You need an up-to-date [Claude Code](https://code.claude.com/docs/en/setup) or
-[Codex](https://developers.openai.com/codex), and
-[Python 3](https://www.python.org/downloads/). VibeWise uses Python to restore
-learning context and reset learning notes. No extra Python packages are needed.
+You need an up-to-date [Claude Code](https://code.claude.com/docs/en/setup),
+[Codex](https://developers.openai.com/codex), or
+[Hermes Agent](https://hermes-agent.nousresearch.com/), and
+[Python 3](https://www.python.org/downloads/). In Claude Code, VibeWise uses Python
+to restore learning context and reset learning notes. In Codex, only reset needs it.
+Hermes runs the Python plugin adapter and uses Python for reset.
+No extra Python packages are needed.
 
 ### Claude Code
 
@@ -123,6 +93,39 @@ mode. It resumes from your saved notes without repeating setup. To reset, run
 In Codex, the commands in this guide use `$` instead of `/`: `/vibe-wise:learn`
 becomes `$vibe-wise:learn`.
 
+### Hermes Agent
+
+Use a recent Hermes Agent with native plugin skills and the `pre_llm_call` hook.
+Install from the repository containing this integration:
+
+```sh
+hermes plugins install Y-Galal/vibe-wise-hermes --no-enable
+hermes plugins enable vibe-wise
+```
+
+Restart Hermes in your project, then ask:
+
+```text
+Load vibe-wise:learn and start learning mode with default preferences.
+```
+
+Hermes loads the namespaced skill through `skill_view`; `/vibe-wise:learn` is not
+registered as a Hermes slash command. Explicit activation saves the initial
+`.vibe-wise/` notes before onboarding. Existing notes, including legacy
+`.sensible-vibes/`, are reused in place. Say “Pause learning” to pause, and load
+Learn again to resume. To reset, explicitly ask to load `vibe-wise:reset`; it
+previews the target and waits for confirmation before backing up the notes.
+
+A small instruction each main-conversation turn asks Hermes to find active notes
+in its current workspace and restore pending decisions. Installation alone does
+not activate learning. This is model-driven restoration, not tool-level checkpoint
+enforcement. Reset requires Python 3, the installed helper and project accessible
+in the same terminal filesystem, and Hermes's default skill template expansion.
+
+Update with `hermes plugins update vibe-wise`, then restart Hermes. Project notes
+stay in your project. See [development checks](docs/development.md#hermes-checks)
+for local validation and the conversation test checklist.
+
 ## What it feels like
 
 You're building a Notion-style notes app: users sign in, create and edit private
@@ -138,7 +141,7 @@ steps are illustrative; intervening design discussions are omitted.
 A note can be in several folders. Deleting a folder should delete its notes.
 ```
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 ✦ Build checkpoint: Deleting a shared note
@@ -154,7 +157,7 @@ When someone deletes Travel, what should happen to that note in Summer?
 Keep it in Summer. If it has no folders left, keep the note outside any folder.
 ```
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 That separates deleting a folder from deleting a note.
@@ -171,7 +174,7 @@ A links table with note_id and folder_id. Deleting a folder removes its links,
 not the notes.
 ```
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 Each link records one membership. Several links can point to the same note;
@@ -202,7 +205,7 @@ Confirm and continue.
 
 *Later, after the remaining choices for this step are worked through...*
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 ✦ Implementation checkpoint: Folder membership
@@ -223,9 +226,9 @@ This step builds storage behavior; the UI comes later.
 Implement this step.
 ```
 
-*Claude writes the code and runs the tests.*
+*Claude or Codex writes the code and runs the tests.*
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 ✦ Implementation report: Folder membership
@@ -235,27 +238,27 @@ Implement this step.
 - Added and ran tests for shared notes and notes left without a folder; both passed.
 ```
 
-You don't need to know the answer already. Claude can explain unfamiliar concepts, sketch the relevant pieces, and help you tackle a smaller question. You stay involved in forming the plan. Answer in plain English; ask for more help or say “skip” whenever you want.
+You don't need to know the answer already. The AI can explain unfamiliar concepts, sketch the relevant pieces, and help you tackle a smaller question. You stay involved in forming the plan. Answer in plain English; ask for more help or say “skip” whenever you want.
 
 Describing what you want sets the requirements. Build Checkpoints ask you to work
 out how it should function; a feature preference doesn't approve an architecture.
 
 | Checkpoint | What happens |
 | --- | --- |
-| **Build** | You reason through how to approach the problem with Claude. |
+| **Build** | You reason through how to approach the problem with the AI. |
 | **Design** | Review the design. **Confirm and continue** records it and continues planning; no code yet. |
-| **Implementation** | Review the specific code changes. **Implement this step** authorizes Claude to make them. |
+| **Implementation** | Review the specific code changes. **Implement this step** authorizes the AI to make them. |
 
 These aren't three mandatory stops. When ready to code, the Implementation
 checkpoint also confirms the design, skipping a separate Design checkpoint.
 Both confirmations offer **Discuss** to ask questions, clarify anything confusing,
 or explore alternatives before deciding.
 
-When Claude proposes additional implementation details, it separates them from your
+When the AI proposes additional implementation details, it separates them from your
 decisions in a short list or table explaining each addition and why it matters.
 You can question or change any item before proceeding.
 
-After implementation, Claude briefly explains what changed, how the key code works,
+After implementation, the AI briefly explains what changed, how the key code works,
 why it fits your decision, any tests it added or updated and what they cover, and
 which checks ran with their results. Ask to dig deeper anywhere it's unclear.
 
@@ -271,7 +274,7 @@ Experience changes the support you get, not your ownership of decisions:
 | Intermediate | Less introductory context; explore interactions and tradeoffs. |
 | Advanced | Probe difficult constraints, failure modes, and design assumptions. |
 
-Everyone reasons first. Claude adapts to what you demonstrate and how familiar you
+Everyone reasons first. The AI adapts to what you demonstrate and how familiar you
 are with the stack. Checkpoint frequency—Light, Normal, or Frequent—is separate.
 
 - “Use fewer checkpoints.”
@@ -288,7 +291,7 @@ To start learning this project from scratch, run `/vibe-wise:reset`. It shows th
 project and asks **Cancel / Reset learning**. After confirmation, it backs up your
 profile, progress, and project map inside the notes directory's `backups/` folder,
 then restarts onboarding. Source code and other projects stay untouched. To change
-your experience level or preferences, just tell Claude; no reset is needed.
+your experience level or preferences, just tell the AI; no reset is needed.
 
 ## Updating
 
