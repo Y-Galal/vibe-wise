@@ -99,7 +99,7 @@ Use a recent Hermes Agent with native plugin skills and the `pre_llm_call` hook.
 Install from the repository containing this integration:
 
 ```sh
-hermes plugins install Y-Galal/vibe-wise --no-enable
+hermes plugins install nykooi1/vibe-wise --no-enable
 hermes plugins enable vibe-wise
 ```
 
