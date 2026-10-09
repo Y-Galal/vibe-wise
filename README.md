@@ -1,14 +1,58 @@
 <img src=".claude-plugin/icon.svg" alt="VibeWise brain with code brackets" width="96" height="96">
 
-# VibeWise
+# VibeWise for Hermes
 
 **You build. AI writes.**
 
-A plugin for **Claude Code** and **Codex** that puts learning first and keeps you in control while AI writes the code you designed. The AI **asks for your approach first**, helps you examine tradeoffs, and explains unfamiliar concepts. You shape the design and decide when it's ready to implement. The AI writes the code, then explains what it changed and why.
+A plugin for **Hermes Agent**, **Claude Code**, and **Codex** that puts learning first and keeps you in control while AI writes the code you designed. The AI **asks for your approach first**, helps you examine tradeoffs, and explains unfamiliar concepts. You shape the design and decide when it's ready to implement. The AI writes the code, then explains what it changed and why.
 
 For anyone who wants to learn as they build—whether you're an aspiring engineer, a junior developer, or an experienced engineer exploring an unfamiliar stack. Practice planning how the pieces fit together, anticipating failures, and checking the result while keeping ownership of the decisions.
 
-## Get started
+## Get started with Hermes
+
+This is a Hermes-compatible fork of [Noah Kim's VibeWise](https://github.com/nykooi1/vibe-wise),
+with the original MIT attribution preserved. The Claude Code and Codex integrations
+remain available below.
+
+Use a recent Hermes version with native plugin skills (`register_skill`) and the
+`pre_llm_call` context hook, plus Python 3. Once these changes are published to this
+fork, install and enable it:
+
+```sh
+hermes plugins install Y-Galal/vibe-wise-hermes --no-enable
+hermes plugins enable vibe-wise
+```
+
+For local development before publishing, copy this checkout to
+`~/.hermes/plugins/vibe-wise` (or your profile's `HERMES_HOME/plugins/vibe-wise`),
+then run `hermes plugins enable vibe-wise`. Restart Hermes in your project.
+
+Ask Hermes:
+
+```text
+Load the vibe-wise:learn skill and start learning mode for this project.
+```
+
+The agent loads `skill_view(name="vibe-wise:learn")`. This is a namespaced skill,
+not a port of Claude's `/vibe-wise:learn` slash command. To reset, explicitly ask
+to load `vibe-wise:reset`; it previews the target and waits for confirmation before
+backing up and resetting notes. Say “Pause learning” to pause, or load Learn again
+to resume.
+
+Existing `.vibe-wise/` and legacy `.sensible-vibes/` notes work in place. A small
+instruction is injected each main-conversation turn, asking Hermes to discover
+notes in its actual workspace and restore active learning. Installing alone does
+not enable learning. Restoration is agent-driven, so it adds file/tool work and
+depends on the model following the instructions. It does not enforce checkpoints
+through a tool-blocking mechanism.
+
+The reset helper requires the plugin and project to be accessible in the same
+terminal filesystem, and Hermes's default skill template substitution enabled.
+Remote/container reset is not supported when the installed helper is inaccessible.
+
+See [Hermes development and validation](docs/hermes.md) for checks and limitations.
+
+## Get started with Claude Code or Codex
 
 You need an up-to-date [Claude Code](https://code.claude.com/docs/en/setup) or
 [Codex](https://developers.openai.com/codex), and
