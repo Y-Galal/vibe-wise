@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("vibewise_hermes", ROOT / "__init__.py")
+spec = importlib.util.spec_from_file_location("vibewise_hermes", ROOT / ".hermes-plugin" / "__init__.py")
 plugin = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(plugin)
 
