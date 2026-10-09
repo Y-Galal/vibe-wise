@@ -4,15 +4,18 @@
 
 **You build. AI writes.**
 
-A Claude Code plugin that puts learning first and keeps you in control while AI writes the code you designed. Claude **asks for your approach first**, helps you examine tradeoffs, and explains unfamiliar concepts. You shape the design and decide when it's ready to implement. Claude writes the code, then explains what it changed and why.
+A plugin for **Claude Code** and **Codex** that puts learning first and keeps you in control while AI writes the code you designed. The AI **asks for your approach first**, helps you examine tradeoffs, and explains unfamiliar concepts. You shape the design and decide when it's ready to implement. The AI writes the code, then explains what it changed and why.
 
 For anyone who wants to learn as they build—whether you're an aspiring engineer, a junior developer, or an experienced engineer exploring an unfamiliar stack. Practice planning how the pieces fit together, anticipating failures, and checking the result while keeping ownership of the decisions.
 
 ## Get started
 
-You need an up-to-date [Claude Code](https://code.claude.com/docs/en/setup) and
+You need an up-to-date [Claude Code](https://code.claude.com/docs/en/setup) or
+[Codex](https://developers.openai.com/codex), and
 [Python 3](https://www.python.org/downloads/). VibeWise uses Python to restore
 learning context and reset learning notes. No extra Python packages are needed.
+
+### Claude Code
 
 Install from the built-in **Anthropic Directory**. In Claude Code, run:
 
@@ -53,6 +56,28 @@ Enable automatic updates through `/plugin` → **Marketplaces** → **vibe-wise*
 Restart Claude Code, then run `/vibe-wise:learn` in your project.
 
 </details>
+
+### Codex
+
+In a terminal, run these commands **one at a time**. First, add the marketplace:
+
+```sh
+codex plugin marketplace add nykooi1/vibe-wise
+```
+
+After it finishes, install the plugin:
+
+```sh
+codex plugin add vibe-wise@vibe-wise
+```
+
+Start Codex in your project and run `$vibe-wise:learn`. Run it again at the start
+of each Codex session, and whenever Codex seems to have lost track of learning
+mode. It resumes from your saved notes without repeating setup. To reset, run
+`$vibe-wise:reset`. Claude Code and Codex share the same `.vibe-wise/` notes.
+
+In Codex, the commands in this guide use `$` instead of `/`: `/vibe-wise:learn`
+becomes `$vibe-wise:learn`.
 
 ## What it feels like
 
@@ -211,9 +236,9 @@ are with the stack. Checkpoint frequency—Light, Normal, or Frequent—is separ
 - “Just implement this one.”
 - “Pause learning.” Resume with `/vibe-wise:learn`.
 
-Preferences, learning notes, and a project map live in `.vibe-wise/` in your project. Learning mode resumes in future sessions and after compaction. Add `.vibe-wise/` to your `.gitignore` to keep your notes out of Git; the plugin won't change it silently.
+Preferences, learning notes, and a project map live in `.vibe-wise/` in your project. In a Git repository, that's the repository root, and VibeWise finds it from any subfolder. Without Git, it's the folder you start in, so always start from your project's top folder. Learning mode resumes in future sessions and after compaction. Add `.vibe-wise/` to your `.gitignore` to keep your notes out of Git; the plugin won't change it silently.
 
-No extra account, backend, or telemetry. Saved notes are included in Claude's context, so your normal Claude Code data settings still apply.
+No extra account, backend, or telemetry. Saved notes are included in the AI's context, so your normal Claude Code or Codex data settings still apply.
 
 To start learning this project from scratch, run `/vibe-wise:reset`. It shows the
 project and asks **Cancel / Reset learning**. After confirmation, it backs up your
@@ -223,7 +248,7 @@ your experience level or preferences, just tell Claude; no reset is needed.
 
 ## Updating
 
-Open `/plugin` → **Installed**, select VibeWise, and choose **Update now**.
+In Claude Code, open `/plugin` → **Installed**, select VibeWise, and choose **Update now**.
 For automatic updates, open **Marketplaces**, select the source you installed from,
 and enable auto-update if it's off.
 
@@ -243,6 +268,18 @@ claude plugin update vibe-wise@vibe-wise
 Then restart Claude Code. Your project learning notes stay intact; no reset is needed.
 Run `claude plugin list` to check the installed version.
 [More about plugin updates](https://code.claude.com/docs/en/discover-plugins#keep-plugins-updated).
+
+For Codex, refresh the marketplace, then install the latest version:
+
+```sh
+codex plugin marketplace upgrade vibe-wise
+```
+
+```sh
+codex plugin add vibe-wise@vibe-wise
+```
+
+Then start a new Codex session.
 
 ## License
 
