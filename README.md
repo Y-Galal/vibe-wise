@@ -105,7 +105,7 @@ steps are illustrative; intervening design discussions are omitted.
 A note can be in several folders. Deleting a folder should delete its notes.
 ```
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 ✦ Build checkpoint: Deleting a shared note
@@ -121,7 +121,7 @@ When someone deletes Travel, what should happen to that note in Summer?
 Keep it in Summer. If it has no folders left, keep the note outside any folder.
 ```
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 That separates deleting a folder from deleting a note.
@@ -138,7 +138,7 @@ A links table with note_id and folder_id. Deleting a folder removes its links,
 not the notes.
 ```
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 Each link records one membership. Several links can point to the same note;
@@ -169,7 +169,7 @@ Confirm and continue.
 
 *Later, after the remaining choices for this step are worked through...*
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 ✦ Implementation checkpoint: Folder membership
@@ -190,9 +190,9 @@ This step builds storage behavior; the UI comes later.
 Implement this step.
 ```
 
-*Claude writes the code and runs the tests.*
+*Claude or Codex writes the code and runs the tests.*
 
-**Claude:**
+**Claude / Codex:**
 
 ```text
 ✦ Implementation report: Folder membership
