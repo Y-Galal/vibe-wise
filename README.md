@@ -22,8 +22,9 @@ For anyone who wants to learn as they build—whether you're an aspiring enginee
 
 You need an up-to-date [Claude Code](https://code.claude.com/docs/en/setup) or
 [Codex](https://developers.openai.com/codex), and
-[Python 3](https://www.python.org/downloads/). VibeWise uses Python to restore
-learning context and reset learning notes. No extra Python packages are needed.
+[Python 3](https://www.python.org/downloads/). In Claude Code, VibeWise uses Python
+to restore learning context and reset learning notes. In Codex, only reset needs it.
+No extra Python packages are needed.
 
 ### Claude Code
 
