@@ -28,8 +28,9 @@ backup/write failures, and restoring incomplete onboarding after reset.
 
 ## Hermes checks
 
-The root `plugin.yaml` and `__init__.py` register the shared Learn and Reset skills
-and a `pre_llm_call` restoration hook. No additional Python dependencies are needed.
+The `.hermes-plugin/plugin.yaml` and `.hermes-plugin/__init__.py` files register
+the shared Learn and Reset skills and a `pre_llm_call` restoration hook.
+No additional Python dependencies are needed.
 The hook has no authoritative workspace path, so it asks the agent to inspect its
 own workspace instead of reading notes from the host process's working directory.
 It does not read or write learner notes itself, and skips delegated child sessions.
@@ -39,7 +40,12 @@ hermes plugins doctor . --ci
 python3 -B -m unittest discover -s tests -v
 ```
 
-For local testing, copy the checkout to `$HERMES_HOME/plugins/vibe-wise` (default
+Run Plugin Doctor on the repository root, not `.hermes-plugin/` alone: its isolated
+copy must include the shared skill files. Hermes discovers the manifest one level
+below the installed repository. The adapter resolves guides relative to its own
+location, independently of the session's working directory.
+
+For local testing, copy the entire checkout to `$HERMES_HOME/plugins/vibe-wise` (default
 `~/.hermes/plugins/vibe-wise`), enable `vibe-wise`, and restart Hermes. Run the
 conversation checks below using `skill_view(name="vibe-wise:learn")` and
 `skill_view(name="vibe-wise:reset")`; use Hermes's `clarify` picker or chat fallback.

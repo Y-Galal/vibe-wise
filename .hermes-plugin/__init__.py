@@ -52,7 +52,7 @@ def restore_context(**kwargs):
 
 def register(ctx):
     """Use only Hermes's public registration API; no imports of host internals."""
-    skills = Path(__file__).resolve().parent / "skills"
+    skills = Path(__file__).resolve().parents[1] / "skills"
     ctx.register_skill("learn", skills / "learn" / "SKILL.md",
                        description="Activate or resume VibeWise learning-first development.")
     ctx.register_skill("reset", skills / "reset" / "SKILL.md",
