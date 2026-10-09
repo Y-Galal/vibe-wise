@@ -202,27 +202,27 @@ Implement this step.
 - Added and ran tests for shared notes and notes left without a folder; both passed.
 ```
 
-You don't need to know the answer already. Claude can explain unfamiliar concepts, sketch the relevant pieces, and help you tackle a smaller question. You stay involved in forming the plan. Answer in plain English; ask for more help or say “skip” whenever you want.
+You don't need to know the answer already. The AI can explain unfamiliar concepts, sketch the relevant pieces, and help you tackle a smaller question. You stay involved in forming the plan. Answer in plain English; ask for more help or say “skip” whenever you want.
 
 Describing what you want sets the requirements. Build Checkpoints ask you to work
 out how it should function; a feature preference doesn't approve an architecture.
 
 | Checkpoint | What happens |
 | --- | --- |
-| **Build** | You reason through how to approach the problem with Claude. |
+| **Build** | You reason through how to approach the problem with the AI. |
 | **Design** | Review the design. **Confirm and continue** records it and continues planning; no code yet. |
-| **Implementation** | Review the specific code changes. **Implement this step** authorizes Claude to make them. |
+| **Implementation** | Review the specific code changes. **Implement this step** authorizes the AI to make them. |
 
 These aren't three mandatory stops. When ready to code, the Implementation
 checkpoint also confirms the design, skipping a separate Design checkpoint.
 Both confirmations offer **Discuss** to ask questions, clarify anything confusing,
 or explore alternatives before deciding.
 
-When Claude proposes additional implementation details, it separates them from your
+When the AI proposes additional implementation details, it separates them from your
 decisions in a short list or table explaining each addition and why it matters.
 You can question or change any item before proceeding.
 
-After implementation, Claude briefly explains what changed, how the key code works,
+After implementation, the AI briefly explains what changed, how the key code works,
 why it fits your decision, any tests it added or updated and what they cover, and
 which checks ran with their results. Ask to dig deeper anywhere it's unclear.
 
@@ -238,7 +238,7 @@ Experience changes the support you get, not your ownership of decisions:
 | Intermediate | Less introductory context; explore interactions and tradeoffs. |
 | Advanced | Probe difficult constraints, failure modes, and design assumptions. |
 
-Everyone reasons first. Claude adapts to what you demonstrate and how familiar you
+Everyone reasons first. The AI adapts to what you demonstrate and how familiar you
 are with the stack. Checkpoint frequency—Light, Normal, or Frequent—is separate.
 
 - “Use fewer checkpoints.”
@@ -255,7 +255,7 @@ To start learning this project from scratch, run `/vibe-wise:reset`. It shows th
 project and asks **Cancel / Reset learning**. After confirmation, it backs up your
 profile, progress, and project map inside the notes directory's `backups/` folder,
 then restarts onboarding. Source code and other projects stay untouched. To change
-your experience level or preferences, just tell Claude; no reset is needed.
+your experience level or preferences, just tell the AI; no reset is needed.
 
 ## Updating
 
