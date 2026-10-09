@@ -99,7 +99,7 @@ Use a recent Hermes Agent with native plugin skills and the `pre_llm_call` hook.
 Install from the repository containing this integration:
 
 ```sh
-hermes plugins install Y-Galal/vibe-wise-hermes --no-enable
+hermes plugins install Y-Galal/vibe-wise --no-enable
 hermes plugins enable vibe-wise
 ```
 
@@ -107,7 +107,7 @@ Install the whole repository, not just `.hermes-plugin/`: the hidden Hermes
 adapter uses the shared `skills/` directory. Current Hermes versions may warn
 that the repository root has no manifest; the nested plugin is discovered when
 you enable `vibe-wise`. Installation and activation use separate names: the
-installed repository is `vibe-wise-hermes`, while the skill namespace is `vibe-wise`.
+installed repository and skill namespace are both `vibe-wise`.
 
 Restart Hermes in your project, then ask:
 
@@ -128,8 +128,8 @@ not activate learning. This is model-driven restoration, not tool-level checkpoi
 enforcement. Reset requires Python 3, the installed helper and project accessible
 in the same terminal filesystem, and Hermes's default skill template expansion.
 
-Update with `hermes plugins update vibe-wise-hermes`, then restart Hermes. Remove
-the installation with `hermes plugins remove vibe-wise-hermes`. Project notes
+Update with `hermes plugins update vibe-wise`, then restart Hermes. Remove
+the installation with `hermes plugins remove vibe-wise`. Project notes
 stay in your project. See [development checks](docs/development.md#hermes-checks)
 for local validation and the conversation test checklist.
 
